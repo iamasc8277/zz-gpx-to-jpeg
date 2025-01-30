@@ -1,19 +1,12 @@
 name: npm audit
 
 on:
+  workflow_dispatch:
+    branches: [ master ]
   push:
-    branches:
-      - master# on:
+    branches: [ master ]
   schedule:
       - cron: '6 6 * * 6'
-
-name: Run Tests
-
-on:
-  push:
-    branches:
-      - main
-  pull_request:
 
 jobs:
   audit:
