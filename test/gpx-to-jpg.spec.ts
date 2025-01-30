@@ -29,9 +29,6 @@ describe('Sample gpx test', () => {
     // check image dimensions
     const { width, height } = await sharp(testJpgFilename).metadata();
 
-console.log(width);
-console.log(height);
-
     assert(width === 3840, 'map has the right width');
     assert(height === 2400, 'map has the right height');
 
