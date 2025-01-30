@@ -21,5 +21,17 @@ jobs:
           node-version: '*'
       - name: Install dependencies
         run: npm ci
-      - name: Run build
+      - name: Audit
+        run: npm audit        
+      - name: Outdated
+        if: success() || failure()
+        run: npm outdated        
+      - name: Lint
+        if: success() || failure()
+        run: npm run lint        
+      - name: Test & Coverage
+        if: success() || failure()
+        run: npm run test        
+      - name: Build
+        if: success() || failure()
         run: npm run build

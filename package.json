@@ -14,8 +14,7 @@
   "type": "module",
   "scripts": {
     "lint": "eslint .",
-    "test": "NODE_OPTIONS=\"--loader ts-node/esm\" mocha",
-    "test:coverage": "c8 npm run test",
+    "test": "NODE_OPTIONS=\"--loader ts-node/esm\" c8 mocha",
     "build": "tsc",
     "exec": "NODE_OPTIONS=\"--loader ts-node/esm\" ts-node index.ts",
     "sample": "npm run exec -- ./sample/sample.gpx"
