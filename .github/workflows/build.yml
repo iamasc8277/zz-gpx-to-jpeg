@@ -64,3 +64,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: badges
           directory: badges
+          force: true
