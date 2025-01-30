@@ -23,3 +23,8 @@ jobs:
         run: npm ci
       - name: Run test
         run: npm test
+      - name: Coverage
+        uses: gaelgirodon/ci-badges-action@v1
+        with:
+          gist-id: 29303e2dee5c8d405bcc736e912d5275
+          token: ${{ secrets.GIST_TOKEN }}

@@ -4,5 +4,6 @@
     "all": true,
     "include": [
         "lib/**/!(*.test.*).[tj]s?(x)"
-    ]
+    ],
+    "reporter": ["cobertura"]
 }
