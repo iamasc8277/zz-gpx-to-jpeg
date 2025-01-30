@@ -21,7 +21,9 @@ jobs:
           node-version: '*'
       - name: Install dependencies
         run: npm ci
+
       - name: Audit
+        id: audit
         run: npm audit        
       - name: Outdated
         if: success() || failure()
@@ -35,3 +37,27 @@ jobs:
       - name: Build
         if: success() || failure()
         run: npm run build
+
+      - name: Create badges directory
+        run: mkdir -p badges
+
+      - name: Create audit badge
+        uses: emibcn/badge-action@v2.0.3
+        with:
+          label: 'npm audit'
+          status: ${{ steps.audit.outcome == 'success' }}
+          color: ${{ steps.audit.outcome == 'success' && 'green' || 'red' }}
+          path: 'badges/audit.svg'
+
+      - name: Commit badges
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add badges
+          git commit -m "Add/Update badge" || true
+      - name: Push badge commit
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: badges
+          directory: badges
