@@ -9,7 +9,7 @@ on:
       - cron: '6 6 * * 6'
 
 jobs:
-  audit:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
