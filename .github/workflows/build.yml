@@ -47,7 +47,7 @@ jobs:
         uses: emibcn/badge-action@v2.0.3
         with:
           label: 'npm audit'
-          status: ${{ steps.audit.outcome == 'success' }}
+          status: ${{ steps.audit.outcome == 'success' && 'passing' || 'failing' }}
           color: ${{ steps.audit.outcome == 'success' && 'green' || 'red' }}
           path: 'badges/audit.svg'
 
@@ -56,6 +56,7 @@ jobs:
           token: '${{ secrets.GITHUB_TOKEN }}'            
       - name: Commit badges
         run: |
+          git rm badges || true
           git add badges
           git commit -m "Add/Update badge" || true
       - name: Push badge commit
