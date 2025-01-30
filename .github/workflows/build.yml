@@ -49,10 +49,11 @@ jobs:
           color: ${{ steps.audit.outcome == 'success' && 'green' || 'red' }}
           path: 'badges/audit.svg'
 
+      - uses: oleksiyrudenko/gha-git-credentials@v2-latest
+        with:
+          token: '${{ secrets.GITHUB_TOKEN }}'            
       - name: Commit badges
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
           git add badges
           git commit -m "Add/Update badge" || true
       - name: Push badge commit
