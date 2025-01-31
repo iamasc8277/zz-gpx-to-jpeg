@@ -5,5 +5,5 @@
     "include": [
         "lib/**/!(*.test.*).[tj]s?(x)"
     ],
-    "reporter": ["text", "cobertura"]
+    "reporter": ["text", "json-summary"]
 }
