@@ -77,14 +77,13 @@ jobs:
           path: 'badges/test.svg'
       - name: Get test coverage
         id: testcoverage
-        run: |
-          coverage=$(jq -r '.total.statements.pct' ./coverage/coverage-summary.json)
+        run: jq -r '.total.statements.pct' ./coverage/coverage-summary.json
       - name: Create test coverage badge
         uses: emibcn/badge-action@v2.0.3
         with:
           label: 'test coverage'
-          status: "${{ steps.testcoverage.outputs.coverage }}%"
-          color: ${{ steps.testcoverage.outputs.coverage > 90 && 'green' || 'red' }}
+          status: "${{ steps.testcoverage.outputs.stdout }}%"
+          color: ${{ steps.testcoverage.outputs.stdout > 90 && 'green' || 'red' }}
           path: 'badges/testcoverage.svg'
       - name: Create build badge
         uses: emibcn/badge-action@v2.0.3
