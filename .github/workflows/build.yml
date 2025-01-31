@@ -16,94 +16,20 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '*'
       - name: Install dependencies
         run: npm ci
-
       - name: Audit
-        id: audit
         run: npm audit        
       - name: Outdated
-        id: outdated
-        if: success() || failure()
         run: npm outdated        
       - name: Lint
-        id: lint
-        if: success() || failure()
         run: npm run lint        
       - name: Test & Coverage
-        id: test
-        if: success() || failure()
         run: npm run test        
       - name: Build
-        id: build
-        if: success() || failure()
         run: npm run build
 
-      - name: Create badges directory
-        if: success() || failure()
-        run: mkdir -p badges
-      - name: Create audit badge
-        uses: emibcn/badge-action@v2.0.3
-        with:
-          label: 'npm audit'
-          status: ${{ steps.audit.outcome == 'success' && 'passing' || 'failing' }}
-          color: ${{ steps.audit.outcome == 'success' && 'green' || 'red' }}
-          path: 'badges/audit.svg'
-      - name: Create outdated badge
-        uses: emibcn/badge-action@v2.0.3
-        with:
-          label: 'npm outdated'
-          status: ${{ steps.outdated.outcome == 'success' && 'passing' || 'failing' }}
-          color: ${{ steps.outdated.outcome == 'success' && 'green' || 'red' }}
-          path: 'badges/outdated.svg'
-      - name: Create lint badge
-        uses: emibcn/badge-action@v2.0.3
-        with:
-          label: 'eslint'
-          status: ${{ steps.lint.outcome == 'success' && 'passing' || 'failing' }}
-          color: ${{ steps.lint.outcome == 'success' && 'green' || 'red' }}
-          path: 'badges/lint.svg'
-      - name: Create test badge
-        uses: emibcn/badge-action@v2.0.3
-        with:
-          label: 'test'
-          status: ${{ steps.test.outcome == 'success' && 'passing' || 'failing' }}
-          color: ${{ steps.test.outcome == 'success' && 'green' || 'red' }}
-          path: 'badges/test.svg'
-      - name: Get test coverage
-        id: testcoverage
-        run: jq -r '.total.statements.pct' ./coverage/coverage-summary.json
-      - name: Create test coverage badge
-        uses: emibcn/badge-action@v2.0.3
-        with:
-          label: 'test coverage'
-          status: "${{ steps.testcoverage.outputs.stdout }}%"
-          color: ${{ steps.testcoverage.outputs.stdout > 90 && 'green' || 'red' }}
-          path: 'badges/testcoverage.svg'
-      - name: Create build badge
-        uses: emibcn/badge-action@v2.0.3
-        with:
-          label: 'build'
-          status: ${{ steps.build.outcome == 'success' && 'passing' || 'failing' }}
-          color: ${{ steps.build.outcome == 'success' && 'green' || 'red' }}
-          path: 'badges/build.svg'
-        
-      - name: Push badges
-        run: |
-          mv badges badges_new
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git fetch origin
-          git checkout badges --
-          rm -r badges
-          mv badges_new badges
-          git status
-          ls -la badges
-          git add badges
-          git commit -m "update badges"
-          git push -f origin $TARGET_BRANCH
