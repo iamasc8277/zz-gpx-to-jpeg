@@ -102,6 +102,8 @@ jobs:
           git checkout badges --
           rm -r badges
           mv badges_new badges
+          git status
+          ls -la badges
           git add badges
           git commit -m "update badges"
           git push -f origin $TARGET_BRANCH
