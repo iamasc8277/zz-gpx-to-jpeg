@@ -94,19 +94,13 @@ jobs:
           color: ${{ steps.build.outcome == 'success' && 'green' || 'red' }}
           path: 'badges/build.svg'
         
-      - name: Set git credentials
-        uses: oleksiyrudenko/gha-git-credentials@v2-latest
-        with:
-          token: '${{ secrets.GITHUB_TOKEN }}'            
-      - name: Commit badges
+      - name: Push badges
         run: |
-          git rm badges || true
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git fetch origin
+          git checkout badges
           git add badges
-          git commit -m "Add/Update badge" || true
-      - name: Push badge commit
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: badges
-          directory: badges
-          force: true
+          git commit -m "update badges"
+          git push -f origin $TARGET_BRANCH
+          
