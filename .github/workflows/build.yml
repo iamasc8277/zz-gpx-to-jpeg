@@ -95,10 +95,13 @@ jobs:
         
       - name: Push badges
         run: |
+          mv badges badges_new
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git fetch origin
           git checkout badges --
+          rm -r badges
+          mv badges_new badges
           git add badges
           git commit -m "update badges"
           git push -f origin $TARGET_BRANCH
