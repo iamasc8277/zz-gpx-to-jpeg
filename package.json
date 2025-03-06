@@ -9,7 +9,7 @@
     "http-terminator": "^3.2.0",
     "sharp": "^0.33.5",
     "uuid": "^11.1.0",
-    "webdriverio": "^9.10.1"
+    "webdriverio": "^9.11.0"
   },
   "type": "module",
   "scripts": {
@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
-    "@types/chai": "^5.0.1",
+    "@types/chai": "^5.2.0",
     "@types/eslint__js": "^8.42.3",
     "@types/express": "^5.0.0",
     "@types/mocha": "^10.0.10",
