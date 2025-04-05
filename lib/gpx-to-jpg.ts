@@ -46,7 +46,7 @@ export default async (file: string): Promise<void> => {
     await fs.copyFile(file, tempfile);
     await browser.setWindowSize(1920, 1200);
     await browser.url(url);
-    await new Promise((resolve) => { setTimeout(resolve, 20000); });
+    await new Promise((resolve) => { setTimeout(resolve, 10000); });
     const screenshot = await browser.takeScreenshot();
     await sharp(Buffer.from(screenshot, 'base64')).jpeg({ mozjpeg: true, quality: 75 }).toFile(`${file}.jpg`);
   } finally {
