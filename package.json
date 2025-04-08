@@ -31,9 +31,9 @@
     "chai": "^5.2.0",
     "eslint": "^9.24.0",
     "mocha": "^11.1.0",
-    "tesseract.js": "^6.0.0",
+    "tesseract.js": "^6.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.29.0"
+    "typescript-eslint": "^8.29.1"
   }
 }
