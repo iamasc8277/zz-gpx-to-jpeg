@@ -24,18 +24,20 @@ export default async (file: string): Promise<void> => {
 
   const browser = await remote({
     capabilities: { 
-      browserName: 'firefox',
-      'moz:firefoxOptions': {
+      browserName: 'chrome',
+      'goog:chromeOptions': {
         args: [
           '--headless',
-          '--kiosk'
+          '--disable-gpu',
+          '--window-size=1920,1200',
+          '--no-sandbox'
         ],
-        prefs: {
-          'layout.css.devPixelsPerPx': '2.0',
-          'browser.cache.disk.enable': false,
-          'browser.cache.memory.enable': false,
-          'browser.cache.offline.enable': false,
-          'network.http.use-cache': false
+        // Ensure device scale factor is 1
+        prefs: {},
+        mobileEmulation: {
+          deviceMetrics: {
+            width: 1920, height: 1200, pixelRatio: 2
+          }
         }
       }
     }
@@ -45,6 +47,9 @@ export default async (file: string): Promise<void> => {
     await fs.mkdir(tmpdir);
     await fs.copyFile(file, tempfile);
     await browser.setWindowSize(1920, 1200);
+    await browser.execute(() => {
+      window.resizeTo(1920, 1200);
+    });
     await browser.url(url);
     await new Promise((resolve) => { setTimeout(resolve, 10000); });
     const screenshot = await browser.takeScreenshot();
