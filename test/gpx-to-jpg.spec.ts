@@ -33,7 +33,7 @@ describe('Sample gpx test', () => {
     assert(height === 2400, 'map has the right height');
 
     // check content
-    const worker = await createWorker('eng');
+    const worker = await createWorker('por');
     let text = '';
     try {
       ({ data: { text } } = await worker.recognize('./tmp/sample.gpx.jpg'));
