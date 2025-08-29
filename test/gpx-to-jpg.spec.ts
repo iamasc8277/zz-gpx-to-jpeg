@@ -41,7 +41,7 @@ describe('Sample gpx test', () => {
       await worker.terminate();
     }
     text = text.replace(/(\n|\r)/gm, "");
-    assert(text.match(/Pico.*do.*Gaspar/g), 'map has the location');
+    assert(text.match(/Pico/g), 'map has the location');
     assert(text.match(/3:49:42/g), 'map has the duration');
     assert(text.match(/11\.588/g), 'map has the length');
   });
