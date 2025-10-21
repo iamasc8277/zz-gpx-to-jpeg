@@ -38,6 +38,8 @@ export async function gpxToJpg(input: string, output: string, opts: GpxToJpgOpti
     args: [
       "--headless",
       "--disable-gpu",
+      "--no-sandbox",
+      "--disable-dev-shm-usage",
       "--remote-debugging-port=9222",
       `--window-size=${width},${height}`,
       `--force-device-scale-factor=${deviceScaleFactor}`,
