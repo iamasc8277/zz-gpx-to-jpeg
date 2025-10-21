@@ -11,6 +11,7 @@
   },
   "tasks": {
     "run": "deno run --allow-net --allow-read --allow-write --allow-run gpx-to-jpg.ts",
+    "sample": "deno task run sample/sample.gpx",
     "test": "deno test --allow-net --allow-read --allow-write --allow-run",
     "update": "deno outdated --update --latest"
   }

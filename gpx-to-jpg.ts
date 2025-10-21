@@ -34,7 +34,21 @@ export async function gpxToJpg(input: string, output: string, opts: GpxToJpgOpti
 
   const htmlUrl = `http://localhost:${port}/static/gpx.html`;
 
-  const chromium = new Deno.Command("chromium", {
+  const findBrowserBinary = async (): Promise<string> => {
+    const names = ["chromium", "chromium-browser", "google-chrome", "chrome"];
+    for (const name of names) {
+      const { success } = await new Deno.Command("which", { args: [name], stdout: "piped", stderr: "null" }).output();
+      if (success) {
+        return name;
+      }
+    }
+    throw new Error("No Chromium-based browser found in PATH.");
+  }
+
+  const browserBin = await findBrowserBinary();
+  console.log(`Using browser binary: ${browserBin}`);
+
+  const chromium = new Deno.Command(browserBin, {
     args: [
       "--headless",
       "--disable-gpu",

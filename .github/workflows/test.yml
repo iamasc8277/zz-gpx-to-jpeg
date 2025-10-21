@@ -13,10 +13,13 @@ jobs:
         uses: denoland/setup-deno@v1
         with:
           deno-version: v2.x
+      - name: Install chromium
+        uses: browser-actions/setup-chrome@v2
+        with:
+          install-dependencies: true
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y chromium || sudo apt-get install -y chromium-browser
           sudo apt-get install tesseract-ocr tesseract-ocr-por
           if [ -x /usr/bin/chromium-browser ] && [ ! -x /usr/bin/chromium ]; then sudo ln -s /usr/bin/chromium-browser /usr/bin/chromium || true; fi
       - name: Lint
