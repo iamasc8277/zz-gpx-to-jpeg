@@ -14,9 +14,13 @@ jobs:
         with:
           deno-version: v2.x
       - name: Install chromium
+        id: setup-chrome
         uses: browser-actions/setup-chrome@v2
         with:
           install-dependencies: true
+      - run: |
+          echo "${{ steps.setup-chrome.outputs.chrome-path }}"
+          echo "${{ steps.setup-chrome.outputs.chrome-version }}"
       - name: Install system dependencies
         run: |
           sudo apt-get update
