@@ -1,5 +1,5 @@
 # zz-gpx-to-jpeg
-[![build](https://github.com/iamasc8277/zz-gpx-to-jpeg/actions/workflows/build.yml/badge.svg)](https://github.com/iamasc8277/zz-gpx-to-jpeg/actions/workflows/build.yml)
+[![test](https://github.com/iamasc8277/zz-gpx-to-jpeg/actions/workflows/test.yml/badge.svg)](https://github.com/iamasc8277/zz-gpx-to-jpeg/actions/workflows/build.yml)
 &ensp; 
-[![build](https://github.com/iamasc8277/zz-gpx-to-jpeg/actions/workflows/dependencies.yml/badge.svg)](https://github.com/iamasc8277/zz-gpx-to-jpeg/actions/workflows/dependencies.yml)
+[![updated](https://github.com/iamasc8277/zz-gpx-to-jpeg/actions/workflows/update.yml/badge.svg)](https://github.com/iamasc8277/zz-gpx-to-jpeg/actions/workflows/update.yml)
 

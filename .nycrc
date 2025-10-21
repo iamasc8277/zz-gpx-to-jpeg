@@ -1,9 +1,0 @@
-{
-    "extends": "@istanbuljs/nyc-config-typescript",
-    "check-coverage": true,
-    "all": true,
-    "include": [
-        "lib/**/!(*.test.*).[tj]s?(x)"
-    ],
-    "reporter": ["text", "json-summary"]
-}

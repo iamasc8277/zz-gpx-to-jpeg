@@ -1,0 +1,32 @@
+name: update
+on:
+  workflow_dispatch:
+  schedule:
+      - cron: '7 7 * * *'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v2.x
+      - name: Update dependencies
+        run: deno task update
+      - name: Install Chromium
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium || sudo apt-get install -y chromium-browser
+          sudo apt-get install tesseract-ocr tesseract-ocr-por
+          if [ -x /usr/bin/chromium-browser ] && [ ! -x /usr/bin/chromium ]; then sudo ln -s /usr/bin/chromium-browser /usr/bin/chromium || true; fi
+      - name: Lint
+        run: deno lint
+      - name: Tests
+        run: deno task tests
+      - name: Commit
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: auto-update dependencies
+
