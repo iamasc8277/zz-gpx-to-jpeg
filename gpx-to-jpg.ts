@@ -35,7 +35,7 @@ export async function gpxToJpg(input: string, output: string, opts: GpxToJpgOpti
   const htmlUrl = `http://localhost:${port}/static/gpx.html`;
 
   const findBrowserBinary = async (): Promise<string> => {
-    const names = ["chromium", "chromium-browser", "google-chrome", "chrome"];
+    const names = ["chrome", "google-chrome", "chromium", "chromium-browser"];
     for (const name of names) {
       const { success } = await new Deno.Command("which", { args: [name], stdout: "piped", stderr: "null" }).output();
       if (success) {
