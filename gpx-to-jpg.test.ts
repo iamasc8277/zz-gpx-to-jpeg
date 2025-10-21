@@ -34,6 +34,6 @@ describe("gpxToJpg", () => {
     const out = await proc.output();
     const ocrText = new TextDecoder().decode(out.stdout).toLowerCase().replace(/[\n\r]+/g, " ");
 
-    assert(ocrText.match(/pico.*do.*gaspar/), "Found 'Pico do Gaspar' in the image.");
+    assert(ocrText.match(/pico.*do.*gaspar/), `Found 'Pico do Gaspar' in the image text '${ocrText}'.`);
   });
 });
