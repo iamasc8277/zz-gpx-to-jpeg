@@ -32,3 +32,4 @@ jobs:
         with:
           name: sample.test.jpg
           path: test/sample.test.jpg
+          retention-days: 3
