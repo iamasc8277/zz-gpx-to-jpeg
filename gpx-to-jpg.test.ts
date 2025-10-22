@@ -13,7 +13,7 @@ const output = join(Deno.cwd(), "test", "sample.test.jpg");;
 
 beforeAll(async () => {
   try { await Deno.remove(output); } catch {  /* ignore */ }
-  await gpxToJpg(input, output, { delay: 10000 });
+  await gpxToJpg(input, output, { delay: 5000 });
 });
 
 describe("gpxToJpg", () => {
@@ -25,7 +25,7 @@ describe("gpxToJpg", () => {
     assertEquals(imgInfo.width, 3840);
     assertEquals(imgInfo.height, 2400);
 
-    const worker = await createWorker('eng');
+    const worker = await createWorker('por');
     const { data: { text } } = await worker.recognize(output);
     await worker.terminate();
     const ocrText = text.toLowerCase().replace(/[\n\r]+/g, " ");
