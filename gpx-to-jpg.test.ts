@@ -14,7 +14,7 @@ beforeAll(async () => {
   const input = join(Deno.cwd(), "sample", "sample.gpx");
   outputDir = await Deno.makeTempDir();
   output = join(outputDir, "sample.test.jpg");
-  await gpxToJpg(input, output);
+  await gpxToJpg(input, output, { delay: 10000 });
 });
 
 afterAll(async () => {

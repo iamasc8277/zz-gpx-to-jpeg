@@ -15,12 +15,13 @@ jobs:
           deno-version: v2.x
       - name: Update dependencies
         run: deno task update
-      - name: Install chromium
+      - name: Install Chrome
         id: setup-chrome
         uses: browser-actions/setup-chrome@v2
         with:
           install-dependencies: true
-      - run: |
+      - name: Check Chrome
+        run: |
           echo "${{ steps.setup-chrome.outputs.chrome-path }}"
           echo "${{ steps.setup-chrome.outputs.chrome-version }}"
       - name: Install system dependencies
