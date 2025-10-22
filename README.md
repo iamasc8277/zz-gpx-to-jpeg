@@ -12,7 +12,9 @@ Render a GPX track onto a map and capture it as a JPEG.
 
 ## Quick usage
 
+```
 deno task run <input.gpx> [output.jpg]
+```
 
 The output filename is optional — if omitted, a JPEG will be auto-generated next to the input file using the input name with a ".jpg" extension.
 
@@ -29,15 +31,17 @@ Runs the converter against the bundled test GPX file.
 
 Run the sample task:
 
+```
 deno task sample
-
-Or pass files explicitly:
+```
 
 ## Tests
 
 Run tests locally:
 
+```
 deno task test
+```
 
 The tests use tesseract.js (Portuguese model) to validate OCR on the produced image.
 
