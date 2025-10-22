@@ -5,20 +5,14 @@ import { gpxToJpg } from "./gpx-to-jpg.ts";
 import { assertEquals, assert } from "@std/assert";
 import { join } from "@std/path";
 import { getImageInfo } from "@retraigo/image-size";
-import { afterAll, beforeAll, describe, it } from "@std/testing/bdd";
+import { beforeAll, describe, it } from "@std/testing/bdd";
 
-let outputDir: string;
-let output: string;
+const input = join(Deno.cwd(), "test", "sample.test.gpx");
+const output = join(Deno.cwd(), "test", "sample.test.jpg");;
 
 beforeAll(async () => {
-  const input = join(Deno.cwd(), "sample", "sample.gpx");
-  outputDir = await Deno.makeTempDir();
-  output = join(outputDir, "sample.test.jpg");
-  await gpxToJpg(input, output, { delay: 10000 });
-});
-
-afterAll(async () => {
-  await Deno.remove(outputDir, { recursive: true });
+  try { await Deno.remove(output); } catch {}
+  await gpxToJpg(input, output);
 });
 
 describe("gpxToJpg", () => {
