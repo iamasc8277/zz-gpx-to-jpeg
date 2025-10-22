@@ -22,10 +22,6 @@ jobs:
         run: |
           echo "${{ steps.setup-chrome.outputs.chrome-path }}"
           echo "${{ steps.setup-chrome.outputs.chrome-version }}"
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install tesseract-ocr tesseract-ocr-por
       - name: Lint
         run: deno lint
       - name: Tests

@@ -6,13 +6,14 @@ import { assertEquals, assert } from "@std/assert";
 import { join } from "@std/path";
 import { getImageInfo } from "@retraigo/image-size";
 import { beforeAll, describe, it } from "@std/testing/bdd";
+import { createWorker } from "tesseract.js";
 
 const input = join(Deno.cwd(), "test", "sample.test.gpx");
 const output = join(Deno.cwd(), "test", "sample.test.jpg");;
 
 beforeAll(async () => {
   try { await Deno.remove(output); } catch {  /* ignore */ }
-  await gpxToJpg(input, output);
+  await gpxToJpg(input, output, { delay: 10000 });
 });
 
 describe("gpxToJpg", () => {
@@ -24,10 +25,10 @@ describe("gpxToJpg", () => {
     assertEquals(imgInfo.width, 3840);
     assertEquals(imgInfo.height, 2400);
 
-    const proc = new Deno.Command("tesseract", { args: [output, "stdout", "-l", "por"], stdout: "piped", stderr: "piped" });
-    const out = await proc.output();
-    const ocrText = new TextDecoder().decode(out.stdout).toLowerCase().replace(/[\n\r]+/g, " ");
-
+    const worker = await createWorker('eng');
+    const { data: { text } } = await worker.recognize(output);
+    await worker.terminate();
+    const ocrText = text.toLowerCase().replace(/[\n\r]+/g, " ");
     assert(ocrText.match(/pico.*do.*gaspar/), `Found 'Pico do Gaspar' in the image text '${ocrText}'.`);
   });
 });
