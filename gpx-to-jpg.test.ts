@@ -11,7 +11,7 @@ const input = join(Deno.cwd(), "test", "sample.test.gpx");
 const output = join(Deno.cwd(), "test", "sample.test.jpg");;
 
 beforeAll(async () => {
-  try { await Deno.remove(output); } catch {}
+  try { await Deno.remove(output); } catch {  /* ignore */ }
   await gpxToJpg(input, output);
 });
 
