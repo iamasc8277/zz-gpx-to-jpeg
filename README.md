@@ -12,7 +12,7 @@ Render a GPX track onto a map and capture it as a JPEG.
 
 ## Quick usage
 
-```
+```sh
 deno task run <input.gpx> [output.jpg]
 ```
 
@@ -31,7 +31,7 @@ Runs the converter against the bundled test GPX file.
 
 Run the sample task:
 
-```
+```sh
 deno task sample
 ```
 
@@ -39,13 +39,25 @@ deno task sample
 
 Run tests locally:
 
-```
+```sh
 deno task test
 ```
 
 The tests use tesseract.js (Portuguese model) to validate OCR on the produced image.
 
+## Container
+
+Build:
+```sh
+podman build -t gpx-to-jpg:latest .
+```
+
+Run the container, mounting the working directory so the script can read/write files:
+```sh
+podman run --rm -v "$PWD":/app:Z gpx-to-jpg:latest --help
+podman run --rm -v "$PWD":/app:Z gpx-to-jpg:latest sample/sample.gpx
+```
+
 ## License
 
 [MIT License](./LICENSE)
-
