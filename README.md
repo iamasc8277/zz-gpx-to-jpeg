@@ -43,18 +43,19 @@ Run tests locally:
 deno task test
 ```
 
-The tests use tesseract.js (Portuguese model) to validate OCR on the produced image.
-
 ## Container
 
-Build:
+### From GitHub Container Registry
+
 ```sh
-podman build -t gpx-to-jpg:latest .
+podman pull ghcr.io/iamasc8277/zz-gpx-to-jpeg:latest
+podman run --rm -v "$PWD":/app:Z ghcr.io/iamasc8277/zz-gpx-to-jpeg:latest sample/sample.gpx
 ```
 
-Run the container, mounting the working directory so the script can read/write files:
+### Build locally
+
 ```sh
-podman run --rm -v "$PWD":/app:Z gpx-to-jpg:latest --help
+podman build -t gpx-to-jpg:latest .
 podman run --rm -v "$PWD":/app:Z gpx-to-jpg:latest sample/sample.gpx
 ```
 
