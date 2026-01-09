@@ -56,6 +56,6 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/iamasc8277/zz-gpx-to-jpg:latest
+          tags: ghcr.io/iamasc8277/zz-gpx-to-jpeg:latest
           file: ./Containerfile
           provenance: false          
